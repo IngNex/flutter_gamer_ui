@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_gamer_ui/memory/in_memory_wireless.dart';
+import 'package:flutter_gamer_ui/memory/in_memory_accessories.dart';
+import 'package:flutter_gamer_ui/ui/screens/accessories/accessories_details_screen.dart';
 import 'package:flutter_gamer_ui/ui/widgets/GlassBox.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -99,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: wireless.length,
+                itemCount: accessories.length,
                 clipBehavior: Clip.none,
                 physics: const BouncingScrollPhysics(
                     parent: ClampingScrollPhysics()),
@@ -136,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       Text(
-                                        wireless[index].name,
+                                        accessories[index].name,
                                         style: const TextStyle(
                                             fontSize: 30,
                                             color: Colors.white,
@@ -144,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        '\$${wireless[index].price}0',
+                                        '\$${accessories[index].price}0',
                                         style: const TextStyle(
                                             fontSize: 25,
                                             color: Colors.black54,
@@ -201,11 +200,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Positioned(
                                   bottom: -50,
                                   right: -50,
-                                  child: Transform.rotate(
-                                    angle: 120,
-                                    child: Image(
-                                      width: 280,
-                                      image: AssetImage(wireless[index].image),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(PageRouteBuilder(
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 650),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 500),
+                                        pageBuilder: (context, animation,
+                                            secondaryAnimation) {
+                                          return AccessoriesDetailsScreen(
+                                            product: accessories[index],
+                                            tag: index,
+                                          );
+                                        },
+                                      ));
+                                    },
+                                    child: Hero(
+                                      tag: index,
+                                      child: Transform.rotate(
+                                        angle: 120,
+                                        child: Image(
+                                          width: 275,
+                                          image: AssetImage(accessories[index]
+                                              .listImage[0]
+                                              .image),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
