@@ -25,7 +25,7 @@ class GlassBox extends StatelessWidget {
           children: [
             //blur effect
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.5),
+              filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
               child: Container(),
             ),
             //gradient effect
@@ -33,14 +33,14 @@ class GlassBox extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(
-                  color: Colors.black.withOpacity(0.13),
+                  color: Colors.white.withOpacity(0.13),
                 ),
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.black.withOpacity(0.15),
-                    Colors.black.withOpacity(0.05)
+                    Colors.white.withOpacity(0.15),
+                    Colors.white.withOpacity(0.05)
                   ],
                 ),
               ),

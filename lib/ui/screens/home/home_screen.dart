@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gamer_ui/memory/in_memory_wireless.dart';
 import 'package:flutter_gamer_ui/ui/widgets/GlassBox.dart';
@@ -38,12 +40,59 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: EdgeInsets.all(10),
+              child: Column(
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
-                  Text('Gamer'),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+                      const Text('Gamer', style: TextStyle(fontSize: 18)),
+                      IconButton(
+                          onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+                    ],
+                  ),
+                  const Text(
+                    'Accessories',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.red),
+                        ),
+                        child: const Text('Wireless'),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.red),
+                        ),
+                        child: const Text(
+                          'Console',
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.red),
+                        ),
+                        child: const Text(
+                          'Headset',
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -56,40 +105,117 @@ class _HomeScreenState extends State<HomeScreen> {
                     parent: ClampingScrollPhysics()),
                 itemBuilder: (context, index) {
                   return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 50.0),
-                      padding: const EdgeInsets.only(right: 50),
-                      child: Transform.translate(
-                        offset: const Offset(20, 0),
-                        child: LayoutBuilder(builder: (context, constrains) {
-                          return Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              GlassBox(
-                                theWidth: double.infinity,
-                                theHeight: double.infinity,
-                                theChild: SizedBox.shrink(),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 40),
-                                child: Column(
-                                  children: [
-                                    Text(wireless[index].name),
-                                  ],
+                    margin: const EdgeInsets.only(top: 20.0, bottom: 50.0),
+                    padding: const EdgeInsets.only(right: 50),
+                    child: Transform.translate(
+                      offset: const Offset(20, 0),
+                      child: LayoutBuilder(
+                        builder: (context, constrains) {
+                          return Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30.0),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      Color.fromARGB(255, 255, 17, 0),
+                                      Color.fromARGB(255, 0, 140, 255)
+                                    ])),
+                            child: Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                const GlassBox(
+                                  theWidth: double.infinity,
+                                  theHeight: double.infinity,
+                                  theChild: SizedBox.shrink(),
                                 ),
-                              ),
-                              Positioned(
-                                top: -60,
-                                right: -20,
-                                child: Image(
-                                  width: 200,
-                                  image: AssetImage(wireless[index].image),
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        wireless[index].name,
+                                        style: const TextStyle(
+                                            fontSize: 30,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        '\$${wireless[index].price}0',
+                                        style: const TextStyle(
+                                            fontSize: 25,
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const FittedBox(
+                                        child: Text(
+                                          'Wireless\nController',
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w800),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                              color: Colors.red,
+                                            ),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10, horizontal: 15),
+                                            child: const Text(
+                                              'Add Cart',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              border:
+                                                  Border.all(color: Colors.red),
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10, horizontal: 15),
+                                            child: const Text(
+                                              'Add to list',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Positioned(
+                                  bottom: -50,
+                                  right: -50,
+                                  child: Transform.rotate(
+                                    angle: 120,
+                                    child: Image(
+                                      width: 280,
+                                      image: AssetImage(wireless[index].image),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
-                        }),
-                      ));
+                        },
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
@@ -112,13 +238,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundColor: Colors.red,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: CircleAvatar(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
                           ),
