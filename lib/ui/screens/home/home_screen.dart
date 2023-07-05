@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
                       const Text(
-                        'Gamer',
+                        'Sony Gamer',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -285,16 +285,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   IconButton(onPressed: () {}, icon: Icon(Icons.home)),
                   const CircleAvatar(
-                    backgroundColor: Colors.red,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                          ),
-                        ),
+                    backgroundColor: Colors.transparent,
+                    radius: 20,
+                    child: Hero(
+                      tag: 'logo',
+                      child: Image(
+                        image: AssetImage('assets/image/logo_gamer.png'),
                       ),
                     ),
                   ),
