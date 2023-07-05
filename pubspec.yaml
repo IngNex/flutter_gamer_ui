@@ -63,6 +63,8 @@ flutter:
     - assets/products/wireless/
     - assets/products/console/
     - assets/products/headset/
+    - assets/products/headset/positionOne/
+    - assets/products/headset/positionTwo/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

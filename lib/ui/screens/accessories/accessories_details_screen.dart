@@ -17,6 +17,7 @@ class AccessoriesDetailsScreen extends StatefulWidget {
 
 class _AccessoriesDetailsScreenState extends State<AccessoriesDetailsScreen> {
   int valueController = 0;
+  int valuePosition = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +118,14 @@ class _AccessoriesDetailsScreenState extends State<AccessoriesDetailsScreen> {
             right: size.height * 0.05,
             left: size.height * 0.05,
             duration: const Duration(milliseconds: 250),
-            child: Hero(
-              tag: widget.tag,
-              child: Image(
-                image:
-                    AssetImage(widget.product.listImage[valueController].image),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              child: Hero(
+                tag: widget.tag,
+                child: Image(
+                  image: AssetImage(widget.product.listImage[valueController]
+                      .image[valuePosition].position),
+                ),
               ),
             ),
           ),
@@ -139,9 +143,9 @@ class _AccessoriesDetailsScreenState extends State<AccessoriesDetailsScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Wireless Controller',
-                          style: TextStyle(
+                        Text(
+                          widget.product.category,
+                          style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 18,
                           ),
@@ -179,7 +183,7 @@ class _AccessoriesDetailsScreenState extends State<AccessoriesDetailsScreen> {
                   children: [
                     Text(
                       '\$${widget.product.price}0',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.w800,
                           fontSize: 20,
                           color: Colors.grey),
@@ -198,6 +202,51 @@ class _AccessoriesDetailsScreenState extends State<AccessoriesDetailsScreen> {
                   ],
                 ),
                 const SizedBox(height: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Position',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: List.generate(
+                        widget.product.listImage[valueController].image.length,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            valuePosition = index;
+                            setState(() {});
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 8.0),
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: index == valuePosition
+                                  ? Border.all(
+                                      width: 2,
+                                      color: const Color.fromARGB(
+                                          255, 239, 236, 236))
+                                  : Border.all(width: 1, color: Colors.grey),
+                            ),
+                            child: Image(
+                              image: AssetImage(
+                                widget.product.listImage[valueController]
+                                    .image[index].position,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -225,7 +274,8 @@ class _AccessoriesDetailsScreenState extends State<AccessoriesDetailsScreen> {
                               border: index == valueController
                                   ? Border.all(
                                       width: 2,
-                                      color: Color.fromARGB(255, 239, 236, 236))
+                                      color: const Color.fromARGB(
+                                          255, 239, 236, 236))
                                   : Border.all(width: 1, color: Colors.grey),
                               shape: BoxShape.circle,
                               color: widget.product.listImage[index].color,

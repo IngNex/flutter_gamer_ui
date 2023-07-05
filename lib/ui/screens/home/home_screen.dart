@@ -46,14 +46,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
-                      const Text('Gamer', style: TextStyle(fontSize: 18)),
+                      const Text(
+                        'Gamer',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.shopping_cart)),
                     ],
                   ),
                   const Text(
                     'Accessories',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.grey,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Row(
@@ -225,7 +235,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           width: 275,
                                           image: AssetImage(accessories[index]
                                               .listImage[0]
-                                              .image),
+                                              .image[0]
+                                              .position),
                                         ),
                                       ),
                                     ),
