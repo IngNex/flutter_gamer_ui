@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
                   Row(
@@ -113,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: const BouncingScrollPhysics(
                     parent: ClampingScrollPhysics()),
                 itemBuilder: (context, index) {
+                  final listTitle = accessories[index].category.split(' ');
                   return Container(
                     margin: const EdgeInsets.only(top: 20.0, bottom: 50.0),
                     padding: const EdgeInsets.only(right: 50),
@@ -134,9 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               clipBehavior: Clip.none,
                               children: [
                                 const GlassBox(
-                                  theWidth: double.infinity,
-                                  theHeight: double.infinity,
-                                  theChild: SizedBox.shrink(),
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  radius: 30.0,
+                                  sigma: 4.0,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(20),
@@ -151,7 +153,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w800),
                                       ),
-                                      const SizedBox(height: 10),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        accessories[index].category,
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800),
+                                      ),
+                                      const SizedBox(height: 5),
                                       Text(
                                         '\$${accessories[index].price}0',
                                         style: const TextStyle(
@@ -160,15 +170,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(height: 10),
-                                      const FittedBox(
+                                      FittedBox(
                                         child: Text(
-                                          'Wireless\nController',
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontWeight: FontWeight.w800),
+                                          '${listTitle[0]}\n${listTitle[1]}',
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(height: 10),
+                                      const SizedBox(height: 8),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -217,12 +228,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         reverseTransitionDuration:
                                             const Duration(milliseconds: 650),
                                         transitionDuration:
-                                            const Duration(milliseconds: 500),
-                                        pageBuilder: (context, animation,
-                                            secondaryAnimation) {
-                                          return AccessoriesDetailsScreen(
-                                            product: accessories[index],
-                                            tag: index,
+                                            const Duration(milliseconds: 650),
+                                        pageBuilder: (context, animation, _) {
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: AccessoriesDetailsScreen(
+                                              product: accessories[index],
+                                              tag: index,
+                                            ),
                                           );
                                         },
                                       ));
